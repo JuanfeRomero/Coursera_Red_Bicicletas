@@ -1,4 +1,4 @@
-var mymap = L.map('main_map').setView([-34.6012424, -58.3861497], 13);
+var mymap = L.map('main_map').setView([-34.6012424, -58.3861497], 15);
 
 const accessToken = 'pk.eyJ1IjoianVhbmZlcm9tZXJvIiwiYSI6ImNrZ3QwZWEyZjE1YXQycnIzYWg5YjZ3eDgifQ.UcYj7Ytgvua8nHNX65Jq-w'
 

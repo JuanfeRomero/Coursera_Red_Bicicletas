@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+    a(href='/bicicletas') Volver
+
+    br
+    br
+    br
+
+    h1= `Bicicleta ${bici.id}`
+
+    br
+    br
+
+    table.table
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') Color
+                th(scope='col') Modelo
+                th(scope='col') Ubicación
+                th(scope='col')
+                th(scope='col')
+        tbody
+
+            tr
+                td= bici.id
+                td= bici.color
+                td= bici.modelo
+                td= bici.ubicacion
+                td
+                    a(href=`/bicicletas/${bici.id}/update`) Editar
+                td
+                    form.inline(method='post' action='bicicletas/' + bici.id + '/delete')
+                        input(type="hidden" name='id' value=bici.id)
+                        button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                            = 'Eliminar'
+
+    br
+    br
+
+    
+    .container
+      #show_map
+    
+    br
+    br
+
+    script.
+        var mymap = L.map('show_map').setView([!{bici.ubicacion}], 15);
+        const accessToken = 'pk.eyJ1IjoianVhbmZlcm9tZXJvIiwiYSI6ImNrZ3QwZWEyZjE1YXQycnIzYWg5YjZ3eDgifQ.UcYj7Ytgvua8nHNX65Jq-w'
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: accessToken
+        }).addTo(mymap);
+        var marker = L.marker([!{bici.ubicacion}]).addTo(mymap);

@@ -2,7 +2,7 @@ var Bicicleta= function (id, color, modelo, ubicacion) {
     this.id = id;
     this.color = color;
     this.modelo = modelo;
-    this.ubicacion = ubicacion
+    this.ubicacion = ubicacion;
 }
 
 Bicicleta.prototype.toString = function () {

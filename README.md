@@ -1,7 +1,9 @@
 # Coursera_Red_Bicicletas
+
 Repositorio que contiene el codigo que estoy utilizando actualmente para seguir el curso de backend con NodeJS, Express y MongoDB, contiene el proyecto creado a partir de tutoriales junto con cosas que decidi agregar personalmente.
 
 ## Cronologia del Proyecto.
+
 1. Creado el proyecto NodeJS
 2. Instalado el framework Express y el script nodemon, agregandolo a package.json como dependencia
 3. Creado la pagina principal de red de bicicletas
@@ -21,4 +23,5 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 17. El curso utiliza .ajax para acceder a la API, yo decidi utilizar .fetch, pero igualmente dejé comentado la solución original. Probado originalmente en una branch nueva.
 18. Las bicicletas actuales aparecen en la pagina principal, insertadas por medio de un fetch request.
 19. Creando un metodo para crear nuevas bicicletas y agregarlas a la api por medio de POST request, agregado al router, probado en postman, funcionando.
-
+20. Creado metodo Update, donde se puede modificar la bicicleta segun su ID. probado en postman con verbo PATCH, funcionando.
+21. Merge de la branch que probaba ES6 a la branch master, commit y subido al remoto.

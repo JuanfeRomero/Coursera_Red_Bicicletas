@@ -48,3 +48,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Archivo especifico para el curso
+url_repos.txt

@@ -25,3 +25,7 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 19. Creando un metodo para crear nuevas bicicletas y agregarlas a la api por medio de POST request, agregado al router, probado en postman, funcionando.
 20. Creado metodo Update, donde se puede modificar la bicicleta segun su ID. probado en postman con verbo PATCH, funcionando.
 21. Merge de la branch que probaba ES6 a la branch master, commit y subido al remoto.
+22. Instalado el framework Jasmine, para hacer unit testing
+23. Creado el spec bicicleta_test, que testea la correcta funcionalidad de cada funcion del modelo bicicleta.js
+24. Instalada la libreria request, que nos deja hacer llamados a la api mas facilmente, para poder testear
+25. Creado los tests para todos los llamados de la api.

@@ -29,3 +29,12 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 23. Creado el spec bicicleta_test, que testea la correcta funcionalidad de cada funcion del modelo bicicleta.js
 24. Instalada la libreria request, que nos deja hacer llamados a la api mas facilmente, para poder testear
 25. Creado los tests para todos los llamados de la api.
+26. Instalado mongoDB en la maquina y ODM client mongoose para poder utilizar mongoose en nuestra pagina
+27. Comenzado a migrar el modelo bicicleta para pasar de guardar en memoria a modelo de mongoose.
+28. Creamos el Schema inicial del modelo Bicicleta con mongoose
+29. Adaptamos las funciones del modelo bicicleta para que funcionen con Mongo.
+30. Adaptamos los tests para que creen su propia base de datos que funcione con Mongo y pueda probar las funciones del modelo.
+31. Adaptamos los tests y los controllers de la API  para que funcione correctamente.
+32. Creamos los modelos Reserva y Usuario, con sus respectivos schemas y funciones para agregar usuarios a la base de datos y realizar reservas de bicicletas con ellos.
+33. Creamos los tests para las funciones del modelo de usuario y la api
+34. Creamos la Route respectiva de la API usuario y lo agregamos a app.js

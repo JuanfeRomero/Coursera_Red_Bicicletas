@@ -112,4 +112,12 @@ describe('Bicicleta API', () => {
 
         });
     });
+
+    
+    afterAll((done) => {
+        Bicicleta.deleteMany({}, function (err, success) {
+            if (err) console.log(err);
+            done()
+        });
+    });
 });

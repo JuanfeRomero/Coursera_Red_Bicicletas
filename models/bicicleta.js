@@ -12,13 +12,8 @@ var bicicletaSchema = new Schema({
     },
 });
 
-bicicletaSchema.statics.createInstance = function (
-    //esto crea una instancia del schema y nos devuelve un nuevo objeto creado, por ejemplo al invocar bicicleta.createInstance
-    code,
-    color,
-    modelo,
-    ubicacion
-) {
+bicicletaSchema.statics.createInstance = function (//esto crea una instancia del schema y nos devuelve un nuevo objeto creado, por ejemplo al invocar bicicleta.createInstance
+    code, color, modelo, ubicacion ) {
     return new this({
         code: code,
         color: color,

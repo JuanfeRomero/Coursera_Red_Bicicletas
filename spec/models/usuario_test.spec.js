@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Bicicleta = require('../../models/bicicleta');
 var Usuario = require('../../models/usuario');
 var Reserva = require('../../models/reserva');
+const { db } = require('../../models/reserva');
 
 describe('Testing Usuarios', function () {
     beforeEach(function (done) {
@@ -61,7 +62,8 @@ describe('Testing Usuarios', function () {
                 if (err) console.log(err);
                 Bicicleta.deleteMany({}, function (err, success) {
                     if (err) console.log(err);
-                    done()
+                    db.close()
+                    done();
                 });
             });
         });

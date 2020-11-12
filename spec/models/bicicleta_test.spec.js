@@ -10,27 +10,28 @@ describe('Testing Bicicletas', () => {
         var mongoDB = 'mongodb://localhost/testdb';
         mongoose.connect(mongoDB, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+            useUnifiedTopology: true
+        }).catch(err => console.log(err));
 
         const db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error: '));
         db.once('open', function () {
             console.log('We are connected to test database!');
         });
-        
+
         done();
     });
 
     afterEach((done) => {
         Bicicleta.deleteMany({}, function (err, success) {
             if (err) console.log(err);
-            done()
+            db.close();
+            done();
         });
     });
 
     describe('Bicicleta.createInstance', () => {
-        it('Crear una instancia de bicicleta y verificar que este correcta', () => {
+        it('Crear una instancia de bicicleta y verificar que este correcta', (done) => {
             var bici = Bicicleta.createInstance(1, 'verde', 'urbana', [
                 -34.5,
                 -54.1,
@@ -41,6 +42,7 @@ describe('Testing Bicicletas', () => {
             expect(bici.modelo).toBe('urbana');
             expect(bici.ubicacion[0]).toEqual(-34.5);
             expect(bici.ubicacion[1]).toEqual(-54.1);
+            done();
         });
     });
 

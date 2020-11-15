@@ -38,3 +38,7 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 32. Creamos los modelos Reserva y Usuario, con sus respectivos schemas y funciones para agregar usuarios a la base de datos y realizar reservas de bicicletas con ellos.
 33. Creamos los tests para las funciones del modelo de usuario y la api
 34. Creamos la Route respectiva de la API usuario y lo agregamos a app.js
+35. Extendiendo funcionalidad de modelo de usuario, agregandole email, password y pasos de verificación, incluyendo los token de seguridad
+36. Validamos el mail por medio de regex.
+37. Creamos los token que van a ser utilizados para seguridad del password
+38. instalamos la libreria de encriptacion bcrypt y lo utilizamos para verificar si el password es modificado y si es el correcto al momento de ser utilizado. 

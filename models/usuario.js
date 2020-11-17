@@ -1,19 +1,26 @@
-var mongoose = require('mongoose');
-var Reserva = require('./reserva');
-var bcrypt = require('bcrypt')
+// mongoose
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const Reserva = require('./reserva');
+//encriptador
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const saltRounds = 10;
+//token y mailer
+const Token = require('../models/token');
+const Mailer =require('../mailer/mailer');
+//Schema inicializado
 var Schema = mongoose.Schema;
 
-const saltRounds = 10;
-
 const validateEmail = (email) => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2, 3})+$/; // objeto regex, determinando el correcto formato del email.
+    const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // objeto regex, determinando el correcto formato del email.
     return re.test(email);
 };
 
 var usuarioSchema = new Schema({
     nombre: {
         type: String,
-        trim: True, //elimina los espacios vacios al principio y al final
+        trim: true, //elimina los espacios vacios al principio y al final
         required: [true, 'El nombre es obligatorio'], // hacer obligatorio y dar un mensaje en caso que no
     },
     email: {
@@ -21,32 +28,39 @@ var usuarioSchema = new Schema({
         trim: true,
         required: [true, 'El email es obligatorio'],
         lowercase: true, //vuelve todo a minuscula al momento de guardar
+        unique: true, //esto define el PATH en el uniqueValidator.
         validate: [validateEmail, 'Por favor ingrese un email valido'], // valida el mail por medio de la funcion pasada
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2, 3})+$/], // match valida el mail a nivel dato
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/], // match valida el mail a nivel dato
     },
     password: {
         type: String,
         required: (true, 'El password es obligatorio'),
     },
-    // valores preparados para el token. 
+    // valores preparados para el token.
     passwordResetToken: String,
     passwordResetTokenExpires: Date,
     verificado: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
-usuarioSchema.pre('save', function(next){  // antes de hacer un save en esta base de datos
-    if(this.isModified('password')){
+usuarioSchema.plugin(uniqueValidator, {
+    message: 'El {PATH} ya existe con otro usuario',
+});
+
+usuarioSchema.pre('save', function (next) {
+    // antes de hacer un save en esta base de datos
+    if (this.isModified('password')) {
         this.password = bcrypt.hashSync(this.password, saltRounds);
     }
     next();
 });
 
-usuarioSchema.methods.validPassword = function(password) { //validar que el password sea el correcto
+usuarioSchema.methods.validPassword = function (password) {
+    //validar que el password sea el correcto
     return bcrypt.compareSync(password, this.password);
-}
+};
 
 usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     var reserva = new Reserva({
@@ -58,5 +72,26 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     console.log(reserva);
     reserva.save(cb);
 };
+
+usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
+    const token = new Token({_userId: this.id, token: crypto.randomBytes(16).toString('hex')});  //creado el token en memoria
+    const email_destination = this.email; // el email que va a recibir el que verifica
+    token.save(function(err){
+        if (err) {return console.log(err.message);}
+
+        const mailOptions = {
+            from: 'no-reply@redbicicletas.com',
+            to: email_destination,
+            subject: 'Verificacion de cuenta',
+            text: 'Hola, \n\n' + 'Por favor, para verificar su cuenta haga click en este link: \n' + 'http://localhost:3000' + '\/token/confirmation\/' + token.token + '\n'
+        };
+
+        Mailer.sendMail(mailOptions, function(err){
+            if (err) {return console.log(err.message);}
+
+            console.log('Se ha enviado un email de verificacion a ' + email_destination + '.');
+        })
+    });
+}
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

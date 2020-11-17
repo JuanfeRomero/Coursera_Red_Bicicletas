@@ -41,4 +41,11 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 35. Extendiendo funcionalidad de modelo de usuario, agregandole email, password y pasos de verificación, incluyendo los token de seguridad
 36. Validamos el mail por medio de regex.
 37. Creamos los token que van a ser utilizados para seguridad del password
-38. instalamos la libreria de encriptacion bcrypt y lo utilizamos para verificar si el password es modificado y si es el correcto al momento de ser utilizado. 
+38. instalamos la libreria de encriptacion bcrypt y lo utilizamos para verificar si el password es modificado y si es el correcto al momento de ser utilizado.
+39. creamos el Schema token.js en models, lo vinculamos con el usuario por medio del ObjectId que referencia a "Usuario"
+40. Incluido validadores de atributos con el plugin unique validator que instalamos por npm y agregamos por medio de usuarioSchema.plugin
+41. Instalado el nodemailer y creada una cuenta de ethereal, creado un test para testear que envie mails correctamente, el orden del video y la actividad estaba invertido así que no era necesario, simplemente fue un test extra que agregue
+42. Creados y maqueteados los pugs index, create y update de usuarios
+43. agregado el route de user y token a app.js
+44. modificado el modelo de usuario para funcionar con ese token y enviar el mail de bienvenida usando el mailer
+45. 

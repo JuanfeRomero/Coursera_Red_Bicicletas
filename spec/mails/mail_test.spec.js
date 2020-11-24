@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer')
-const Mailer = require('../../mailer/testMail');
+const Mailer = require('../../mailer/mailer');
 
 describe('Probando mailer', () =>{
     describe('Enviar mail', () =>{

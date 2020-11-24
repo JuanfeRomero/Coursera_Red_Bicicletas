@@ -7,7 +7,7 @@ block content
     br
     br
 
-    h1= `Bicicleta ${bici.id}`
+    h1= `Bicicleta ${bici._id}`
 
     br
     br
@@ -24,15 +24,15 @@ block content
         tbody
 
             tr
-                td= bici.id
+                td= bici._id
                 td= bici.color
                 td= bici.modelo
                 td= bici.ubicacion
                 td
-                    a(href=`/bicicletas/${bici.id}/update`) Editar
+                    a(href=`/bicicletas/${bici._id}/update`) Editar
                 td
-                    form.inline(method='post' action='bicicletas/' + bici.id + '/delete')
-                        input(type="hidden" name='id' value=bici.id)
+                    form.inline(method='post' action='bicicletas/' + bici._id + '/delete')
+                        input(type="hidden" name='_id' value=bici._id)
                         button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
                             = 'Eliminar'
 

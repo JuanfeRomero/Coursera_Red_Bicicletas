@@ -6,14 +6,13 @@ Password 	U99gbHxeMTG5Kp8crs
 */
 
 
-const Transporter = nodemailer.createTransport({
+const transporter = {
     host: 'smtp.ethereal.email',
     port: 587,
-    secure: false,
     auth: {
         user: 'erich3@ethereal.email',
         pass: 'U99gbHxeMTG5Kp8crs',
     },
-});
+};
 
-module.exports = Transporter;
+module.exports = nodemailer.createTransport(transporter);

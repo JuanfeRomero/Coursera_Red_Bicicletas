@@ -23,8 +23,8 @@ fetch("api/bicicletas")
     })
     .then((data) => {
         console.log(data);
-        data.bicicletas.forEach((bici) => {
-            L.marker(bici.ubicacion, { title: bici.id }).addTo(mymap);
+        data.bicicleta.forEach((bici) => {
+            L.marker(bici.ubicacion, { title: bici._id }).addTo(mymap);
         });
     })
     .catch((err) => console.log(err));

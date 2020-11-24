@@ -48,4 +48,11 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 42. Creados y maqueteados los pugs index, create y update de usuarios
 43. agregado el route de user y token a app.js
 44. modificado el modelo de usuario para funcionar con ese token y enviar el mail de bienvenida usando el mailer
-45. 
+45. El curso está fuera de orden así que hay que revisar bien todo antes de continuar
+46. Bajamos la carpeta adicional session, que incluye informacion de login, forgot and reset password y un css para darle formato
+47. Instalamos passport, passport local y express-sessions para poder crear la autenticacion del login y el seteo de cookies
+48. Programamos el tipo de sesion local y la inicializacion de cookies en el app.js y la estrategia, serializacion y deserializacion del usuario en config/passport.js
+49. Creamos los metodos get y post del login, forgot password y reset password en app.js acorde al ejercicio (despues lo cambiare a sus respectivos routes y controllers)
+50. Agregando el metodo para reiniciar password en el modelo de usuario.js en app.js
+51. Creado la funcion loggedIn para verificar que el usuario este logueado y pueda acceder a otras paginas como '/bicicletas'
+52. Arreglando bugs en las vistas y controller de bicicleta

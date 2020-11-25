@@ -56,3 +56,6 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 50. Agregando el metodo para reiniciar password en el modelo de usuario.js en app.js
 51. Creado la funcion loggedIn para verificar que el usuario este logueado y pueda acceder a otras paginas como '/bicicletas'
 52. Arreglando bugs en las vistas y controller de bicicleta
+53. Instalamos JWT para poder utilizar autenticacion en la API con JSON Web Token
+54. Creamos la funcion validarUsuario que verifica que el token sea el correcto
+55. Creamos el controller authControllerAPI.js para que autentique a los usuario que pidan algo a las API

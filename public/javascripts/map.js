@@ -17,7 +17,11 @@ L.tileLayer(
 ).addTo(mymap);
 var marker = L.marker([-34.6040424, -58.3815]).addTo(mymap);
 
-fetch("api/bicicletas")
+fetch("api/bicicletas", {
+    headers: {
+        "x-access-token" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFjNGE3ZTA3ZGJiMzI1NGVlNGFjYiIsImlhdCI6MTYwNjI2MTEzOCwiZXhwIjoxNjA2ODY1OTM4fQ.L0cjA0zjzIFUr7bHwKozbVLJVMjihw8NX3s6AxdftH0"
+    }
+})
     .then((res) => {
         return res.json();
     })

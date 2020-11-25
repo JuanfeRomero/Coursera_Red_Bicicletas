@@ -13,7 +13,7 @@ module.exports = {
                         status: 'error',
                         message: 'Mail/Password incorreto',
                         data: null,
-                    });
+                    }); 
                 } else if (
                     userInfo != null &&
                     bcrypt.compareSync(req.body.password, userInfo.password)

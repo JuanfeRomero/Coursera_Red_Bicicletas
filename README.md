@@ -59,3 +59,4 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 53. Instalamos JWT para poder utilizar autenticacion en la API con JSON Web Token
 54. Creamos la funcion validarUsuario que verifica que el token sea el correcto
 55. Creamos el controller authControllerAPI.js para que autentique a los usuario que pidan algo a las API
+56. aplicamos la funcion validarUsuario a la api de bicicletas.

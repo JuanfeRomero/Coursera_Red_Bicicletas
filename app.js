@@ -76,7 +76,7 @@ app.post('/login', function (req, res, next) {
             if (err) return next(err);
             return res.redirect('/bicicletas');
         });
-    })(req, res, next);
+    })(req, res, next); 
 });
 
 app.get('/logout', function (req, res) {

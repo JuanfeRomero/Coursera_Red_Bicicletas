@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -44,7 +45,8 @@ app.set('secretKey', 'jwt_pwd_!!223344');
 // traer base de datos a app.js
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb://localhost/red_bicicletas'; // variable con la conexion, el nombre red_bicicletas podria ser cualquier otro
+// variable de ambiente a la DB.
+var mongoDB = process.env.MONGO_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }); // parser para garantizar compatibilidad con versiones nuevas de mongoose
 mongoose.Promise = global.Promise; // creo que esto habilita el uso de promesas en mongoose
 var db = mongoose.connection; // guardamos la conexion en db

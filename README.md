@@ -60,3 +60,7 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 54. Creamos la funcion validarUsuario que verifica que el token sea el correcto
 55. Creamos el controller authControllerAPI.js para que autentique a los usuario que pidan algo a las API
 56. aplicamos la funcion validarUsuario a la api de bicicletas.
+57. creamos el remoto a heroku
+58. creamos la base de datos en la nube con mongo atlas
+59. creamos un usuario en la base de datos en la nube
+60. instalamos dotenv y empezamos a utilizar información sensible como variables de ambiente en lugar de mostrarlas explicitamente.

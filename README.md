@@ -63,4 +63,6 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 57. creamos el remoto a heroku
 58. creamos la base de datos en la nube con mongo atlas
 59. creamos un usuario en la base de datos en la nube
-60. instalamos dotenv y empezamos a utilizar información sensible como variables de ambiente en lugar de mostrarlas explicitamente.
+60. Instalamos dotenv y empezamos a utilizar información sensible como variables de ambiente en lugar de mostrarlas explicitamente.
+61. Instalado nodemailer-sendgrid-transport para utilizar en production con heroku
+62. cambiamos las variables con información de mailer para utilizarse con variables de ambiente.

@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 //traer passport y express session y definimos el store del motor de sesion que vamos a usar
 const passport = require('./config/passport');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 // rutas a la carpeta rutas que contiene el link a los controles.
 var indexRouter = require('./routes/index');
@@ -18,16 +19,28 @@ var bicicletaRouter = require('./routes/bicicletasRoute');
 var bicicletaAPIRouter = require('./routes/api/bicicletaRouteAPI');
 var usuarioAPIRouter = require('./routes/api/usuarioRouteAPI');
 var authAPIRouter = require('./routes/api/authRouteAPI');
+const authRouter = require('./routes/authRoute');
 
 // traemos el usuario y el token para recuperar el password, borrar cuando se muda metodos de login y password a un route separado.
 const Usuario = require('./models/usuario');
 const Token = require('./models/token');
 
-// guardamos la sesion en memoria, mas agil pero si se resetea el servidor se pierden los datos, tambien se puede guardar en mongoDB
-const store = new session.MemoryStore();
+// guardamos la sesion en memoria para uso local, en mongoDB para produccion.
+let store;
+if(process.env.NODE_ENV === 'development') {
+    store = new session.MemoryStore;
+} else {
+    store = new MongoDBStore({
+        uri: process.env.MONGO_URI,
+        collection: 'sessions'
+    });
+    store.on('error', function(error){
+        assert.ifError(error);
+        assert.ok(false);
+    });
+}
 
-
-var app = express();
+let app = express();
 //definimos la session que está usando
 app.use(
     session({
@@ -44,6 +57,7 @@ app.set('secretKey', 'jwt_pwd_!!223344');
 
 // traer base de datos a app.js
 var mongoose = require('mongoose');
+const { assert } = require('console');
 
 // variable de ambiente a la DB.
 var mongoDB = process.env.MONGO_URI;
@@ -174,6 +188,8 @@ app.use('/privacy_policy', function(req, res){
 app.use('/googlec8d9bc0769164fde.html', function(req, res){
     res.sendFile('/public/googlec8d9bc0769164fde.html', {root: '.'});
 });
+
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

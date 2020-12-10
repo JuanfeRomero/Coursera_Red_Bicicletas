@@ -73,6 +73,33 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     reserva.save(cb);
 };
 
+usuarioSchema.statics.findOneOrCreateByGoogle = function findOneOrCreate(condition, callback) {
+    const self = this;
+    self.findOne({
+        $or:[
+            {'googleId': condition.id}, {'email': condition.emails[0].value}
+        ]}, (err, result) => {
+            if(result) {
+                callback(err, result);
+            } else {
+                console.log('-----------------CONDITION--------------');
+                console.log(condition);
+                let values = {};
+                values.googleId = condition.id;
+                values.email = condition.email;
+                values.nombre = condition.displayName || 'SIN NOMBRE';
+                values.verificado = true;
+                values.password = condition._json.etag;
+                console.log('------------------VALUES----------------');
+                console.log(values);
+                self.create(values, (err, result) =>{
+                    if(err){ console.log(err);}
+                    return callback(err, result);
+                })
+            }
+    })
+}
+
 usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
     const token = new Token({_userId: this.id, token: crypto.randomBytes(16).toString('hex')});  //creado el token en memoria
     const email_destination = this.email; // el email que va a recibir el que verifica

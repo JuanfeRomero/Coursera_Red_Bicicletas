@@ -19,7 +19,7 @@ var bicicletaRouter = require('./routes/bicicletasRoute');
 var bicicletaAPIRouter = require('./routes/api/bicicletaRouteAPI');
 var usuarioAPIRouter = require('./routes/api/usuarioRouteAPI');
 var authAPIRouter = require('./routes/api/authRouteAPI');
-const authRouter = require('./routes/authRoute');
+const authGoogleRouter = require('./routes/authGoogleRoute');
 
 // traemos el usuario y el token para recuperar el password, borrar cuando se muda metodos de login y password a un route separado.
 const Usuario = require('./models/usuario');
@@ -189,7 +189,7 @@ app.use('/googlec8d9bc0769164fde.html', function(req, res){
     res.sendFile('/public/googlec8d9bc0769164fde.html', {root: '.'});
 });
 
-app.use('/auth', authRouter);
+app.use('/auth/google', authGoogleRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

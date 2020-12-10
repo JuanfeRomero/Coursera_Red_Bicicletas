@@ -73,7 +73,7 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     reserva.save(cb);
 };
 
-usuarioSchema.statics.findOneOrCreateByGoogle = function findOneOrCreate(condition, callback) {
+usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition, callback) {
     const self = this;
     self.findOne({
         $or:[

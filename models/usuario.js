@@ -77,7 +77,7 @@ usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition,
     const self = this;
     self.findOne({
         $or:[
-            {'googleId': condition.id}, {'email': condition.emails[0].value}
+            {'googleId': condition.id}, {'email': condition.email}
         ]}, (err, result) => {
             if(result) {
                 callback(err, result);

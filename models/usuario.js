@@ -86,10 +86,10 @@ usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition,
                 console.log(condition);
                 let values = {};
                 values.googleId = condition.id;
-                values.email = condition.email;
+                values.email = condition.emails;
                 values.nombre = condition.displayName || 'SIN NOMBRE';
                 values.verificado = true;
-                values.password = condition._json.etag;
+                values.password = condition._json.sub;
                 console.log('------------------VALUES----------------');
                 console.log(values);
                 self.create(values, (err, result) =>{

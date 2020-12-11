@@ -86,7 +86,7 @@ usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition,
                 console.log(condition);
                 let values = {};
                 values.googleId = condition.id;
-                values.email = condition.emails;
+                values.email = condition.email;
                 values.nombre = condition.displayName || 'SIN NOMBRE';
                 values.verificado = true;
                 values.password = condition._json.sub;

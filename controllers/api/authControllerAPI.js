@@ -13,7 +13,7 @@ module.exports = {
                         status: 'error',
                         message: 'Mail/Password incorreto',
                         data: null,
-                    }); 
+                    });
                 } else if (
                     userInfo != null &&
                     bcrypt.compareSync(req.body.password, userInfo.password)
@@ -52,5 +52,30 @@ module.exports = {
                 });
             });
         });
+    },
+    authFacebookToken: function (req, res, next) {
+        if (req.user) {
+            req.user
+                .save()
+                .then(() => {
+                    const token = jwt.sign(
+                        { id: req.user.id },
+                        req.app.get('secretKey'),
+                        { expiresIn: '7d' }
+                    );
+                    res.status(200).json({
+                        message: 'Usuario encontrado o creado!',
+                        data: { user: req.user, token: token },
+                    });
+                })
+                .catch((err) => {
+                    console.log(
+                        'error durante la autorizacion del token: ' + err
+                    );
+                    res.status(500).json({ message: err.message });
+                });
+        } else {
+            res.status(401);
+        }
     },
 };

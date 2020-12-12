@@ -43,6 +43,8 @@ var usuarioSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    googleId: String,
+    facebookId: String
 });
 
 usuarioSchema.plugin(uniqueValidator, {
@@ -86,6 +88,33 @@ usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition,
                 console.log(condition);
                 let values = {};
                 values.googleId = condition.id;
+                values.email = condition.emails[0].value;
+                values.nombre = condition.displayName || 'SIN NOMBRE';
+                values.verificado = true;
+                values.password = condition._json.sub;
+                console.log('------------------VALUES----------------');
+                console.log(values);
+                self.create(values, (err, result) =>{
+                    if(err){ console.log(err);}
+                    return callback(err, result);
+                })
+            }
+    })
+}
+
+usuarioSchema.statics.findOrCreateByFacebook = function findOneOrCreate(condition, callback) {
+    const self = this;
+    self.findOne({
+        $or:[
+            {'facebookId': condition.id}, {'email': condition.emails[0].value}
+        ]}, (err, result) => {
+            if(result) {
+                callback(err, result);
+            } else {
+                console.log('-----------------CONDITION--------------');
+                console.log(condition);
+                let values = {};
+                values.facebookId = condition.id;
                 values.email = condition.emails[0].value;
                 values.nombre = condition.displayName || 'SIN NOMBRE';
                 values.verificado = true;

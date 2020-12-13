@@ -129,6 +129,13 @@ usuarioSchema.statics.findOneOrCreateByFacebook = function findOneOrCreate(condi
     })
 }
 
+var mailPage;
+if(process.env.NODE_ENV === 'production'){
+    mailPage = 'https://red-bicicletas-juanfe.herokuapp.com';
+} else {
+    mailPage = 'http://localhost:3000'
+}
+
 usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
     const token = new Token({_userId: this.id, token: crypto.randomBytes(16).toString('hex')});  //creado el token en memoria
     const email_destination = this.email; // el email que va a recibir el que verifica
@@ -136,10 +143,10 @@ usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
         if (err) {return console.log(err.message);}
 
         const mailOptions = {
-            from: 'no-reply@redbicicletas.com',
+            from: 'juanferomerocode@gmail.com',
             to: email_destination,
             subject: 'Verificacion de cuenta',
-            text: 'Hola, \n\n' + 'Por favor, para verificar su cuenta haga click en este link: \n' + 'http://localhost:3000' + '\/token/confirmation\/' + token.token + '\n'
+            text: 'Hola, \n\n' + 'Por favor, para verificar su cuenta haga click en este link: \n' + mailPage + '\/token/confirmation\/' + token.token + '\n'
         };
 
         Mailer.sendMail(mailOptions, function(err){
@@ -153,12 +160,12 @@ usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
 usuarioSchema.methods.resetPassword = function(cb) {
     const token = new Token ({_userId: this.id, token: crypto.randomBytes(16).toString('hex')});
     const email_destination = this.email;
-    const resetLink = `http://localhost:3000/login/resetPassword/${token.token}`
+    const resetLink = `${mailPage}/login/resetPassword/${token.token}`
     token.save(function (err) {
         if(err) {return cb(err);}
 
         const mailOptions = {
-            from: 'no-reply@redbicicletas.com',
+            from: 'juanferomerocode@gmail.com',
             to: email_destination,
             subject: 'Reseteo de password de cuenta',
             text: `Hola.

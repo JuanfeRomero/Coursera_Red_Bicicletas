@@ -2,6 +2,9 @@
 
 Repositorio que contiene el codigo que estoy utilizando actualmente para seguir el curso de backend con NodeJS, Express y MongoDB, contiene el proyecto creado a partir de tutoriales junto con cosas que decidi agregar personalmente.
 
+Aqui se encuentra la web en heroku:
+https://red-bicicletas-juanfe.herokuapp.com
+
 ## Cronologia del Proyecto.
 
 1. Creado el proyecto NodeJS
@@ -66,3 +69,10 @@ Repositorio que contiene el codigo que estoy utilizando actualmente para seguir 
 60. Instalamos dotenv y empezamos a utilizar información sensible como variables de ambiente en lugar de mostrarlas explicitamente.
 61. Instalado nodemailer-sendgrid-transport para utilizar en production con heroku
 62. cambiamos las variables con información de mailer para utilizarse con variables de ambiente.
+63. Agregado opciones de login con facebook y google
+64. Agregado registro de facebook por token.
+65. Agregado monitoreo por new relic.
+66. Arreglado sistema de envio de mails de sendgrid
+67. Arreglado sistema de login y cambiado para usar routes y controllers.
+68. Agregado una opcion de registro de usuario sin vulnerar la parte de usuarios
+69. Agregado un nuevo token al mapa para que pueda acceder y detectar bicicletas.

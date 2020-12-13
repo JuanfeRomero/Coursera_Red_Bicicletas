@@ -7,18 +7,12 @@ head
   script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
   script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   link(rel='stylesheet', href='../../stylesheets/login.css')
-  
+
 body#LoginForm
   .container
     .login-form
       .main-div
         .panel
-          if info && info.message 
-            div.alert.alert-danger
-              = info.message
-          h2 Recuperación de password
-          p Por favor, ingrese su email y le enviaremos a esa cuenta las instrucciones de reseteo de password
-        form#Login(action='./forgotPassword' method='post')
-          .form-group
-            input#email.form-control(type='email' placeholder='Email Address' name="email")
-          button.btn.btn-primary(type='submit') Resetear
+          h2 Cuenta creada!
+          p Revise su cuenta de email, le llegarán allí un mail de verificación.
+        

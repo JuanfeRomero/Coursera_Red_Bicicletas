@@ -153,7 +153,7 @@ usuarioSchema.methods.enviar_mail_bienvenida = function(cb) {
 usuarioSchema.methods.resetPassword = function(cb) {
     const token = new Token ({_userId: this.id, token: crypto.randomBytes(16).toString('hex')});
     const email_destination = this.email;
-    const resetLink = `http://localhost:3000/resetPassword/${token.token}`
+    const resetLink = `http://localhost:3000/login/resetPassword/${token.token}`
     token.save(function (err) {
         if(err) {return cb(err);}
 

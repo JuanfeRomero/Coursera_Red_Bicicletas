@@ -75,7 +75,7 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     reserva.save(cb);
 };
 
-usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition, callback) {
+usuarioSchema.statics.findOneOrCreateByGoogle = function findOneOrCreate(condition, callback) {
     const self = this;
     self.findOne({
         $or:[
@@ -102,7 +102,7 @@ usuarioSchema.statics.findOrCreateByGoogle = function findOneOrCreate(condition,
     })
 }
 
-usuarioSchema.statics.findOrCreateByFacebook = function findOneOrCreate(condition, callback) {
+usuarioSchema.statics.findOneOrCreateByFacebook = function findOneOrCreate(condition, callback) {
     const self = this;
     self.findOne({
         $or:[
@@ -116,7 +116,7 @@ usuarioSchema.statics.findOrCreateByFacebook = function findOneOrCreate(conditio
                 let values = {};
                 values.facebookId = condition.id;
                 values.email = condition.emails[0].value;
-                values.nombre = condition.displayName || 'SIN NOMBRE';
+                values.nombre = (condition.name.givenName + condition.name.familyName) || 'SIN NOMBRE';
                 values.verificado = true;
                 values.password = crypto.randomBytes(16).toString('hex');
                 console.log('------------------VALUES----------------');

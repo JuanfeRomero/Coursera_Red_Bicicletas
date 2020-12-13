@@ -15,9 +15,15 @@ block content
           li.nav-item
             a.nav-link.js-scroll-trigger(href='/bicicletas') Bicicletas
           li.nav-item
-            a.nav-link.js-scroll-trigger(href='#signup') Contacto
-          li.nav-item
-            a.nav-link.js-scroll-trigger(href='/login') Login
+            a.nav-link.js-scroll-trigger(href='/usuarios') Usuarios
+            if logged.isLogged
+              li.nav-item
+                a.nav-link.js-scroll-trigger(href='/usuarios/' + logged.id + '/update')= logged.email  
+              li.nav-item
+                a.nav-link.js-scroll-trigger(href='/logout') Logout
+            else
+              li.nav-item
+                a.nav-link.js-scroll-trigger(href='/login') Login
   // Masthead
   header.masthead
     .container.d-flex.h-100.align-items-center

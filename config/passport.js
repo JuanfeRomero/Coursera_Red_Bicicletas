@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Usuario = require('../models/usuario');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const FacebookTokenStrategy = require('passport-facebook-token');
 
 passport.use(
@@ -37,10 +38,13 @@ passport.use(
         },
         function (accessToken, refreshToken, profile, done) {
             try {
-                Usuario.findOrCreateByFacebook(profile, function (err, user) {
-                    if (err) return console.log('err: ' + err);
-                    return done(err, user);
-                });
+                Usuario.findOneOrCreateByFacebook(
+                    profile,
+                    function (err, user) {
+                        if (err) return console.log('err: ' + err);
+                        return done(err, user);
+                    }
+                );
             } catch (err2) {
                 console.log('error antes de crear el usuario: ' + err2);
                 return err2, null;
@@ -57,8 +61,27 @@ passport.use(
             callbackURL: '/auth/google/callback',
         },
         function (accessToken, refreshToken, profile, done) {
-            Usuario.findOrCreateByGoogle(profile, function (err, user) {
+            Usuario.findOneOrCreateByGoogle(profile, function (err, user) {
                 return done(err, user);
+            });
+        }
+    )
+);
+
+passport.use(
+    new FacebookStrategy(
+        {
+            clientID: process.env.FACEBOOK_ID,
+            clientSecret: process.env.FACEBOOK_SECRET,
+            callbackURL: '/auth/facebook/callback',
+            profileFields: ['id', 'emails', 'name']
+        },
+        function (accessToken, refreshToken, profile, done) {
+            Usuario.findOneOrCreateByFacebook(profile, function (err, user) {
+                if (err) {
+                    return done(err);
+                }
+                return done(null, user);
             });
         }
     )

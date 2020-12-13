@@ -19,7 +19,7 @@ var marker = L.marker([-34.6040424, -58.3815]).addTo(mymap);
 
 fetch("api/bicicletas", {
     headers: {
-        "x-access-token" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFjNGE3ZTA3ZGJiMzI1NGVlNGFjYiIsImlhdCI6MTYwNjI2MTEzOCwiZXhwIjoxNjA2ODY1OTM4fQ.L0cjA0zjzIFUr7bHwKozbVLJVMjihw8NX3s6AxdftH0"
+        "x-access-token" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDU0NDczZWViZGZiMDk1OGRiNTAzMyIsImlhdCI6MTYwNzgxMjIxMSwiZXhwIjoxNjA4NDE3MDExfQ.uV1B8XnAfQMpfOKdXUD67X7Vc9mjN152xejOSoO1K1g"
     }
 })
     .then((res) => {
